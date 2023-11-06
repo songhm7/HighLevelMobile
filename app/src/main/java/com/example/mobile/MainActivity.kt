@@ -9,6 +9,6 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        findViewById<TextView>(R.id.testTextView).setText("TestText2")
+        findViewById<TextView>(R.id.testTextView).setText("TestText332")
     }
 }
