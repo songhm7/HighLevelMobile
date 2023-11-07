@@ -23,6 +23,7 @@ class MainActivity : AppCompatActivity() {
             startActivity(Intent(this, LoginActivity::class.java))
             finish()
         }
+
         findViewById<TextView>(R.id.textUID).text = Firebase.auth.currentUser?.uid ?: "No User" //현재유저id표시
         findViewById<Button>(R.id.button_signout).setOnClickListener {//로그아웃버튼
             Firebase.auth.signOut()
