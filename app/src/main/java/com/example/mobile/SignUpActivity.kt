@@ -8,6 +8,8 @@ import android.widget.EditText
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.google.firebase.auth.ktx.auth
+import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 
 class SignUpActivity : AppCompatActivity() {
@@ -39,7 +41,7 @@ class SignUpActivity : AppCompatActivity() {
             .addOnCompleteListener(this) {
                 if (it.isSuccessful) {
                     Toast.makeText(this, "회원가입에 성공했습니다. 로그인해주세요", Toast.LENGTH_SHORT).show()
-                    saveUserData(userEmail,password,userName,birthDay,Firebase.auth.currentUser?.uid ?: "No User")
+
                     Firebase.auth.signOut()
                     startActivity(
                         Intent(this, LoginActivity::class.java))
@@ -55,6 +57,10 @@ class SignUpActivity : AppCompatActivity() {
         Firebase.auth.createUserWithEmailAndPassword(userEmail,password)
             .addOnCompleteListener(this){
                 if(it.isSuccessful){
+                    //데이터베이스에 저장
+                    saveUserData(userEmail,password,userName,birthDay)//,Firebase.auth.currentUser?.uid ?: "No User"
+
+                    //로그인 수행
                     doLogin(userEmail,password, userName, birthDay)
                 }
                 else{
@@ -63,7 +69,20 @@ class SignUpActivity : AppCompatActivity() {
                 }
             }
     }
-    private fun saveUserData(userEmail:String, password:String, userName: String, birthDay : String, UID: String){
-        //입력받은 이름과 생년월일을 어딘가(스토리지? 베이터베이스?)에 저장하는 코드 작성
+
+    private val db: FirebaseFirestore = Firebase.firestore
+    private val itemsCollectionRef = db.collection("users") // users는 Collection ID
+
+    //새로운 회원의 정보를 데이터베이스에 저장
+    private fun saveUserData(userEmail:String, password:String, userName: String, birthDay : String){//, UID : String
+        //UID는 굳이 필요 없어보여서 일단 뺐습니다.
+
+        //입력받은 정보들을 FireStore에 저장
+        val itemMap = hashMapOf("birth" to birthDay, "email" to userEmail,
+            "name" to userName, "password" to password);
+        itemsCollectionRef.add(itemMap).addOnFailureListener { println("실패") }
+
     }
+
+
 }
