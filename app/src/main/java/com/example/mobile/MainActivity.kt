@@ -33,10 +33,14 @@ class MainActivity : AppCompatActivity() {
             finish()
         }
 
-        findViewById<TextView>(R.id.textUID).text = Firebase.auth.currentUser?.uid ?: "No User" //현재유저id표시
+        findViewById<TextView>(R.id.textUID).text = Firebase.auth.currentUser?.email ?: "No User" //현재유저id표시
         findViewById<Button>(R.id.button_signout).setOnClickListener {//로그아웃버튼
             Firebase.auth.signOut()
             startActivity(Intent(this, LoginActivity::class.java))
+            finish()
+        }
+        findViewById<Button>(R.id.buttonWriteSell).setOnClickListener {
+            startActivity(Intent(this, WriteActivity::class.java))
             finish()
         }
 

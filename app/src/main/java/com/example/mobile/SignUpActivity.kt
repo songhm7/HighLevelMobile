@@ -80,9 +80,14 @@ class SignUpActivity : AppCompatActivity() {
         //입력받은 정보들을 FireStore에 저장
         val itemMap = hashMapOf("birth" to birthDay, "email" to userEmail,
             "name" to userName, "password" to password);
-        itemsCollectionRef.add(itemMap).addOnFailureListener { println("실패") }
-
+        itemsCollectionRef.document(userEmail).set(itemMap) //도큐먼트id를 이메일로 설정
+            .addOnSuccessListener {
+                // 성공 처리
+                println("사용자 데이터 저장 성공")
+            }
+            .addOnFailureListener {
+                // 실패 처리
+                println("실패")
+            }
     }
-
-
 }
