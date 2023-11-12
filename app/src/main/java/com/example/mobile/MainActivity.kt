@@ -63,10 +63,19 @@ class MainActivity : AppCompatActivity() {
         val itemsCollectionRef = db.collection("selllist") // users는 Collection ID
 
         //selllist의 모든 문서를 리사이클러뷰에 표시합니다.
-        itemsCollectionRef.get().addOnSuccessListener {
-            for (doc in it)
-                viewModel.addItem(Item(doc["title"].toString(), doc["sellername"].toString(),
-                    doc["price"].toString())) //price는 firestore에서 number로 받는데 일단 string으로 해놨습니다.
+        itemsCollectionRef.get().addOnSuccessListener { documents ->
+            for(document in documents){
+                val item = Item(
+                    id = document.id,
+                    title = document.getString("title") ?: "제목없음",
+                    body = document.getString("body") ?: "내용없음",
+                    onSale = document.getBoolean("onSale") ?: false,
+                    price = document.getLong("price")?.toInt() ?: 0,
+                    selleremail = document.getString("selleremail") ?: "이메일없음",
+                    sellername = document.getString("sellername") ?: "판매자없음"
+                )
+                viewModel.addItem(item)
+            }
         }
     }
 }
