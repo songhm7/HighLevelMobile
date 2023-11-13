@@ -5,6 +5,8 @@ import android.graphics.BitmapFactory
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Button
+import android.widget.CheckBox
+import android.widget.EditText
 import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
@@ -75,6 +77,63 @@ class MainActivity : AppCompatActivity() {
                     sellername = document.getString("sellername") ?: "판매자없음"
                 )
                 viewModel.addItem(item)
+            }
+        }
+
+        //필터 적용
+        findViewById<Button>(R.id.button_filter).setOnClickListener {
+            //일단 현재 리스트를 전부 지운 뒤
+            viewModel.deleteall()
+
+            val onSaleCheck = findViewById<CheckBox>(R.id.onSaleCheck)
+            val query_id = findViewById<EditText>(R.id.query_id)
+            val query_title = findViewById<EditText>(R.id.query_title)
+            val query_max = findViewById<EditText>(R.id.query_max)
+            val query_min = findViewById<EditText>(R.id.query_min)
+
+            var query_result = itemsCollectionRef.whereEqualTo("onSale",onSaleCheck.isChecked)
+
+            if (!query_id.getText().toString().isEmpty()){
+                query_result = query_result.whereEqualTo("sellername", query_id.getText().toString());
+            }
+            if (!query_title.getText().toString().isEmpty()){
+                query_result = query_result.whereEqualTo("title", query_title.getText().toString());
+            }
+//            if (!query_min.getText().toString().isEmpty()){
+//                query_result = query_result.whereGreaterThan("price", Integer.parseInt(query_min.getText().toString()));
+//            }
+//            if (!query_max.getText().toString().isEmpty()){
+//                query_result = query_result.whereLessThan("price", Integer.parseInt(query_max.getText().toString()));
+//            }
+            query_result.get().addOnSuccessListener { documents ->
+                var items = ArrayList<Item>()
+                for(document in documents){
+                    val item = Item(
+                        id = document.id,
+                        title = document.getString("title") ?: "제목없음",
+                        body = document.getString("body") ?: "내용없음",
+                        onSale = document.getBoolean("onSale") ?: false,
+                        price = document.getLong("price")?.toInt() ?: 0,
+                        selleremail = document.getString("selleremail") ?: "이메일없음",
+                        sellername = document.getString("sellername") ?: "판매자없음"
+                    )
+                    items.add(item)
+                }
+
+                if (!query_max.getText().toString().isEmpty()){
+                    val maxPrice = Integer.parseInt(query_max.getText().toString())
+                    items = ArrayList(items.filter { it.price <= maxPrice })
+                }
+
+                if (!query_min.getText().toString().isEmpty()){
+                    val minPrice = Integer.parseInt(query_min.getText().toString())
+                    items = ArrayList(items.filter { it.price >= minPrice })
+                }
+
+                for (item in items){
+                    viewModel.addItem(item)
+                }
+
             }
         }
     }

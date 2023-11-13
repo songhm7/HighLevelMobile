@@ -79,4 +79,8 @@ class CustomAdapter(private val viewModel: MyViewModel) :
             items.removeAt(pos)
             itemsListData.value = items
         }
+        fun deleteall(){
+            items.clear()
+            itemsListData.value = items
+        }
     }

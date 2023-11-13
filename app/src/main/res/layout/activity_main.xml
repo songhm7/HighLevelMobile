@@ -16,19 +16,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView4" />
 
-    <Button
-        android:id="@+id/button_signout"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:layout_marginBottom="12dp"
-        android:text="sign_out"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textUID"
-        app:layout_constraintVertical_bias="0.057" />
-
     <TextView
         android:id="@+id/textView4"
         android:layout_width="wrap_content"
@@ -41,30 +28,139 @@
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerView"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
+        android:layout_width="match_parent"
+        android:layout_height="575dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/button_signout" />
-
-    <TextView
-        android:id="@+id/textView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="32dp"
-        android:layout_marginEnd="16dp"
-        android:text="필터기능 추가해야함"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/button_signout"
+        app:layout_constraintVertical_bias="0.0" />
 
     <Button
         android:id="@+id/buttonWriteSell"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="47dp"
+        android:layout_marginTop="120dp"
+        android:layout_marginEnd="47dp"
         android:text="판매글 추가"
         app:layout_constraintBottom_toTopOf="@+id/recyclerView"
-        app:layout_constraintEnd_toEndOf="parent" />
+        app:layout_constraintEnd_toStartOf="@+id/button_filter"
+        app:layout_constraintHorizontal_bias="0.8"
+        app:layout_constraintStart_toEndOf="@+id/button_signout"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/button_signout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="64dp"
+        android:text="sign_out"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textUID" />
+
+    <Button
+        android:id="@+id/button_filter"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="120dp"
+        android:text="필터 적용"
+        app:layout_constraintBottom_toTopOf="@+id/recyclerView"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <EditText
+        android:id="@+id/query_id"
+        android:layout_width="80dp"
+        android:layout_height="39dp"
+        android:ems="10"
+        android:hint="ID"
+        android:inputType="text"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <EditText
+        android:id="@+id/query_title"
+        android:layout_width="178dp"
+        android:layout_height="39dp"
+        android:ems="10"
+        android:hint="Title"
+        android:inputType="text"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/query_id" />
+
+    <EditText
+        android:id="@+id/query_max"
+        android:layout_width="80dp"
+        android:layout_height="39dp"
+        android:ems="10"
+        android:hint="Max"
+        android:inputType="number"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/query_title" />
+
+    <EditText
+        android:id="@+id/query_min"
+        android:layout_width="75dp"
+        android:layout_height="39dp"
+        android:layout_marginEnd="16dp"
+        android:ems="10"
+        android:hint="Min"
+        android:inputType="number"
+        app:layout_constraintEnd_toEndOf="@+id/between"
+        app:layout_constraintTop_toBottomOf="@+id/query_title" />
+
+    <TextView
+        android:id="@+id/between"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="7dp"
+        android:text="~"
+        app:layout_constraintEnd_toStartOf="@+id/query_max"
+        app:layout_constraintTop_toBottomOf="@+id/query_title" />
+
+    <TextView
+        android:id="@+id/pricetxt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="4dp"
+        android:text="가격 : "
+        app:layout_constraintEnd_toStartOf="@+id/query_min"
+        app:layout_constraintTop_toBottomOf="@+id/query_title" />
+
+    <TextView
+        android:id="@+id/titletxt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="44dp"
+        android:layout_marginEnd="4dp"
+        android:text="제목 : "
+        app:layout_constraintEnd_toStartOf="@+id/query_title"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/IDtxt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="4dp"
+        android:text="아이디 : "
+        app:layout_constraintEnd_toStartOf="@+id/query_id"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <CheckBox
+        android:id="@+id/onSaleCheck"
+        android:layout_width="81dp"
+        android:layout_height="36dp"
+        android:layout_marginEnd="4dp"
+        android:text="판매중"
+        app:layout_constraintEnd_toStartOf="@+id/IDtxt"
+        app:layout_constraintTop_toTopOf="parent" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
