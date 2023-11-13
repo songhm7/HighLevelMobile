@@ -77,8 +77,9 @@
         android:layout_width="80dp"
         android:layout_height="39dp"
         android:ems="10"
-        android:hint="ID"
+        android:hint="판매자명"
         android:inputType="text"
+        android:textSize="16dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -87,8 +88,9 @@
         android:layout_width="178dp"
         android:layout_height="39dp"
         android:ems="10"
-        android:hint="Title"
+        android:hint="제목"
         android:inputType="text"
+        android:textSize="16dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/query_id" />
 
@@ -97,8 +99,9 @@
         android:layout_width="80dp"
         android:layout_height="39dp"
         android:ems="10"
-        android:hint="Max"
+        android:hint="최대"
         android:inputType="number"
+        android:textSize="16dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/query_title" />
 
@@ -108,8 +111,9 @@
         android:layout_height="39dp"
         android:layout_marginEnd="16dp"
         android:ems="10"
-        android:hint="Min"
+        android:hint="최소"
         android:inputType="number"
+        android:textSize="16dp"
         app:layout_constraintEnd_toEndOf="@+id/between"
         app:layout_constraintTop_toBottomOf="@+id/query_title" />
 
@@ -137,7 +141,7 @@
         android:id="@+id/titletxt"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="44dp"
+        android:layout_marginTop="48dp"
         android:layout_marginEnd="4dp"
         android:text="제목 : "
         app:layout_constraintEnd_toStartOf="@+id/query_title"
@@ -149,7 +153,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="4dp"
-        android:text="아이디 : "
+        android:text="판매자 : "
         app:layout_constraintEnd_toStartOf="@+id/query_id"
         app:layout_constraintTop_toTopOf="parent" />
 

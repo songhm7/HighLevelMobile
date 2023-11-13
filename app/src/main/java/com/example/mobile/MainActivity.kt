@@ -93,18 +93,7 @@ class MainActivity : AppCompatActivity() {
 
             var query_result = itemsCollectionRef.whereEqualTo("onSale",onSaleCheck.isChecked)
 
-            if (!query_id.getText().toString().isEmpty()){
-                query_result = query_result.whereEqualTo("sellername", query_id.getText().toString());
-            }
-            if (!query_title.getText().toString().isEmpty()){
-                query_result = query_result.whereEqualTo("title", query_title.getText().toString());
-            }
-//            if (!query_min.getText().toString().isEmpty()){
-//                query_result = query_result.whereGreaterThan("price", Integer.parseInt(query_min.getText().toString()));
-//            }
-//            if (!query_max.getText().toString().isEmpty()){
-//                query_result = query_result.whereLessThan("price", Integer.parseInt(query_max.getText().toString()));
-//            }
+
             query_result.get().addOnSuccessListener { documents ->
                 var items = ArrayList<Item>()
                 for(document in documents){
@@ -118,6 +107,15 @@ class MainActivity : AppCompatActivity() {
                         sellername = document.getString("sellername") ?: "판매자없음"
                     )
                     items.add(item)
+                }
+
+                if (!query_id.getText().toString().isEmpty()){
+                    val id = query_id.getText().toString()
+                    items = ArrayList(items.filter { it.sellername.contains(id) })
+                }
+                if (!query_title.getText().toString().isEmpty()){
+                    val title = query_title.getText().toString()
+                    items = ArrayList(items.filter { it.title.contains(title) })
                 }
 
                 if (!query_max.getText().toString().isEmpty()){
