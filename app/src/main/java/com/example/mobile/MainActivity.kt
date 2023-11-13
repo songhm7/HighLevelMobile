@@ -91,9 +91,8 @@ class MainActivity : AppCompatActivity() {
             val query_max = findViewById<EditText>(R.id.query_max)
             val query_min = findViewById<EditText>(R.id.query_min)
 
+            //필터 적용
             var query_result = itemsCollectionRef.whereEqualTo("onSale",onSaleCheck.isChecked)
-
-
             query_result.get().addOnSuccessListener { documents ->
                 var items = ArrayList<Item>()
                 for(document in documents){

@@ -7,6 +7,7 @@ import android.widget.Button
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import com.google.firebase.auth.ktx.auth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
@@ -20,6 +21,9 @@ class DetailActivity : AppCompatActivity() {
         setContentView(R.layout.activity_detail)
         val titleOfShow = findViewById<TextView>(R.id.titleOfShow)
         val fixButton = findViewById<Button>(R.id.fix)
+        var sellerEmail : String = ""
+        var price : String = ""
+        var onSale = false
 
         val itemId = intent.getStringExtra("ITEM_ID")
         // Firestore에서 itemId에 해당하는 게시물 정보를 가져와 표시
@@ -28,10 +32,10 @@ class DetailActivity : AppCompatActivity() {
                 if (document != null) {
                     val title = document.getString("title") ?: "제목 없음"
                     val body = document.getString("body") ?: "내용 없음"
-                    val price = document.getLong("price")?.toString() ?: "0"
-                    val sellerEmail = document.getString("selleremail") ?: "이메일 없음"
+                    price = document.getLong("price")?.toString() ?: "0"
+                    sellerEmail = document.getString("selleremail") ?: "이메일 없음"
                     val sellerName = document.getString("sellername") ?: "판매자 없음"
-                    val onSale = document.getBoolean("onSale") ?: false
+                    onSale = document.getBoolean("onSale") ?: false
 
                     titleOfShow.text = title
                     titleOfShow.setTextSize(30f)
@@ -59,6 +63,21 @@ class DetailActivity : AppCompatActivity() {
         }
         fixButton.setOnClickListener{
             // 글 작성자와 현재 인증자 이메일이 일치할때만 글을 수정할수 있게 하는 기능 넣을 예정
+            if(Firebase.auth.currentUser?.email == sellerEmail){
+                var intent = Intent(this, WriteActivity::class.java).apply {
+                    this.putExtra("itemid",itemId)
+                    this.putExtra("title",titleOfShow.text);
+                    this.putExtra("price",price)
+                    this.putExtra("body",findViewById<TextView>(R.id.bodyOfShow).text)
+                    this.putExtra("onsale",onSale)
+                    this.putExtra("modify",true)
+                }
+                startActivity(intent)
+                finish()
+            }
+            else{
+                Toast.makeText(this, "본인이 올린 글만 수정할 수 있습니다.", Toast.LENGTH_SHORT).show()
+            }
         }
     }
 

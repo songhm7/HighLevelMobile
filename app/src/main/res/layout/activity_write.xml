@@ -31,13 +31,20 @@
         android:hint="가격(원)"
         android:id="@+id/priceOfPost">
     </EditText>
+
     <EditText
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
         android:id="@+id/bodyOfPost"
-        android:lines="8"
+        android:layout_width="match_parent"
+        android:layout_height="552dp"
         android:hint="본문"
-        android:minLines="6"
-        android:maxLines="10">
-    </EditText>
+        android:lines="8"
+        android:maxLines="10"
+        android:minLines="6"></EditText>
+
+    <CheckBox
+        android:id="@+id/ifOnSale"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:checked="true"
+        android:text="판매중" />
 </LinearLayout>
