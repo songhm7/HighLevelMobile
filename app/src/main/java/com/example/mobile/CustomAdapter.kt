@@ -1,6 +1,7 @@
 package com.example.mobile
 
 import android.content.Intent
+import android.graphics.Color
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -31,6 +32,7 @@ class CustomAdapter(private val viewModel: MyViewModel) :
                 sell.text = title
                 name.text = "  판매자 : "+ sellername
                 priceOfobj.text = "  가격 : "+ price
+                view.setBackgroundColor(if (onSale) Color.parseColor("#87CEEB") else Color.parseColor("#FFC0CB"))
             }
         }
 
@@ -41,19 +43,7 @@ class CustomAdapter(private val viewModel: MyViewModel) :
         val view = layoutInflater.inflate(R.layout.sell_list, viewGroup, false)
         return ViewHolder(view)
     }
-    /*override fun onCreateViewHolder(viewGroup: ViewGroup, viewType: Int): ViewHolder {
-        val layoutInflater = LayoutInflater.from(viewGroup.context)
-        val view = layoutInflater.inflate(R.layout.sell_list, viewGroup, false)
-        val viewHolder = ViewHolder(view)
-        view.setOnClickListener {
-            viewModel.itemClickEvent.value = viewHolder.adapterPosition
-        }
-        view.setOnLongClickListener {
-            viewModel.itemLongClick = viewHolder.adapterPosition
-            false // for context menu
-        }
-        return viewHolder
-    } */
+
     // ViewHolder 에 데이터 연결
     override fun onBindViewHolder(viewHolder: ViewHolder, position: Int) {
         viewHolder.setContents(position)

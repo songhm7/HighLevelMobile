@@ -62,7 +62,6 @@ class DetailActivity : AppCompatActivity() {
             finish()
         }
         fixButton.setOnClickListener{
-            // 글 작성자와 현재 인증자 이메일이 일치할때만 글을 수정할수 있게 하는 기능 넣을 예정
             if(Firebase.auth.currentUser?.email == sellerEmail){
                 var intent = Intent(this, WriteActivity::class.java).apply {
                     this.putExtra("itemid",itemId)

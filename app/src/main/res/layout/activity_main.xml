@@ -162,7 +162,8 @@
         android:layout_width="81dp"
         android:layout_height="36dp"
         android:layout_marginEnd="4dp"
-        android:text="판매중"
+        android:text="판매여부"
+        android:textSize="13dp"
         app:layout_constraintEnd_toStartOf="@+id/IDtxt"
         app:layout_constraintTop_toTopOf="parent" />
 
