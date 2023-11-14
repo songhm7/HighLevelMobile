@@ -19,8 +19,9 @@ class DetailActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_detail)
+        supportActionBar?.title = Firebase.auth.currentUser?.email ?: "No User"
         val titleOfShow = findViewById<TextView>(R.id.titleOfShow)
-        val fixButton = findViewById<Button>(R.id.fix)
+        val msgButton = findViewById<Button>(R.id.messageToSeller)
         var sellerEmail : String = ""
         var price : String = ""
         var onSale = false
@@ -61,22 +62,8 @@ class DetailActivity : AppCompatActivity() {
             startActivity(Intent(this, MainActivity::class.java))
             finish()
         }
-        fixButton.setOnClickListener{
-            if(Firebase.auth.currentUser?.email == sellerEmail){
-                var intent = Intent(this, WriteActivity::class.java).apply {
-                    this.putExtra("itemid",itemId)
-                    this.putExtra("title",titleOfShow.text);
-                    this.putExtra("price",price)
-                    this.putExtra("body",findViewById<TextView>(R.id.bodyOfShow).text)
-                    this.putExtra("onsale",onSale)
-                    this.putExtra("modify",true)
-                }
-                startActivity(intent)
-                finish()
-            }
-            else{
-                Toast.makeText(this, "본인이 올린 글만 수정할 수 있습니다.", Toast.LENGTH_SHORT).show()
-            }
+        msgButton.setOnClickListener{
+            Toast.makeText(this, "판매자에게 메시지 기능 구현 예정", Toast.LENGTH_SHORT).show()
         }
     }
 

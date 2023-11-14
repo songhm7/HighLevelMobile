@@ -5,4 +5,10 @@
 <item
     android:id="@+id/menu_write_new_post"
     android:title="판매글 작성"/>
+<item
+    android:id="@+id/menu_view_message"
+    android:title="받은 쪽지"/>
+<item
+    android:id="@+id/menu_write_message"
+    android:title="쪽지 보내기"/>
 </menu>

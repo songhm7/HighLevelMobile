@@ -10,6 +10,8 @@ import android.widget.TextView
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.recyclerview.widget.RecyclerView
+import com.google.firebase.auth.ktx.auth
+import com.google.firebase.ktx.Firebase
 
 class CustomAdapter(private val viewModel: MyViewModel) :
     RecyclerView.Adapter<CustomAdapter.ViewHolder>() {
@@ -18,21 +20,41 @@ class CustomAdapter(private val viewModel: MyViewModel) :
             view.setOnClickListener {
                 val item = viewModel.items[adapterPosition]
                 val context = view.context
-                val intent = Intent(context, DetailActivity::class.java).apply {
-                    putExtra("ITEM_ID", item.id)
+                val currentUserEmail = Firebase.auth.currentUser?.email
+                if(currentUserEmail == item.selleremail) {
+                    // 사용자가 아이템의 판매자인 경우
+                    val intent = Intent(context, WriteActivity::class.java).apply {
+                        putExtra("itemid", item.id)
+                        putExtra("title", item.title)
+                        putExtra("price", item.price.toString())
+                        putExtra("body", item.body)
+                        putExtra("onsale", item.onSale)
+                        putExtra("modify", true)
                 }
-                context.startActivity(intent)
+                    context.startActivity(intent)
+                } else {
+                    val intent = Intent(context, DetailActivity::class.java).apply {
+                        putExtra("ITEM_ID", item.id)
+                    }
+                    context.startActivity(intent)
+                }
             }
         }
         fun setContents(pos: Int) {
             val sell = view.findViewById<TextView>(R.id.sell)
             val name = view.findViewById<TextView>(R.id.sellerName)
-            val priceOfobj = view.findViewById<TextView>(R.id.price)
+            var priceOfobj = view.findViewById<TextView>(R.id.price)
             with (viewModel.items[pos]) {
-                sell.text = title
-                name.text = "  판매자 : "+ sellername
-                priceOfobj.text = "  가격 : "+ price
-                view.setBackgroundColor(if (onSale) Color.parseColor("#87CEEB") else Color.parseColor("#FFC0CB"))
+                sell.text = " " + title
+                name.text = " 판매자 : "+ sellername
+                if(onSale){
+                    view.setBackgroundColor(Color.parseColor("#87CEEB"))
+                    priceOfobj.text = " 가격 : "+ price + " | (판매중)"
+                }
+                else{
+                    view.setBackgroundColor(Color.parseColor("#FFC0CB"))
+                    priceOfobj.text = " 가격 : "+ price + " | (판매종료)"
+                }
             }
         }
 

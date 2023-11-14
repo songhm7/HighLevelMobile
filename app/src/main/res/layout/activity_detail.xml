@@ -24,27 +24,44 @@
             android:layout_weight="1"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:id="@+id/fix"
-            android:text="수정"/>
+            android:id="@+id/messageToSeller"
+            android:text="쪽지"/>
     </LinearLayout>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="#000000"/>
     <TextView
         android:layout_weight="1"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="판매자 정보"
-        android:id="@+id/textViewSeller"/>
+        android:id="@+id/textViewSeller"
+        android:background="#F0F0F0"/>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="#000000"/>
     <TextView
         android:layout_weight="1"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="가격"
         android:id="@+id/textViewPrice"/>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="#000000"/>
     <TextView
         android:layout_weight="20"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="본문"
         android:id="@+id/bodyOfShow"/>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="#000000"/>
     <TextView
         android:layout_weight="1"
         android:layout_width="match_parent"
@@ -52,4 +69,8 @@
         android:text="판매여부"
         android:textAlignment="center"
         android:id="@+id/isOnSale"/>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="#000000"/>
 </LinearLayout>

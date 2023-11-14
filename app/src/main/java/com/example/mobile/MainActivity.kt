@@ -12,6 +12,7 @@ import android.widget.EditText
 import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
+import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -44,6 +45,14 @@ class MainActivity : AppCompatActivity() {
             R.id.menu_write_new_post -> {
                 startActivity(Intent(this, WriteActivity::class.java))
                 finish()
+                true
+            }
+            R.id.menu_write_message -> {
+                Toast.makeText(this, "메시지 보내기 기능 구현 예정", Toast.LENGTH_SHORT).show()
+                true
+            }
+            R.id.menu_view_message -> {
+                Toast.makeText(this, "받은 메시지 목록 기능 구현 예정", Toast.LENGTH_SHORT).show()
                 true
             }
             else -> super.onOptionsItemSelected(item)

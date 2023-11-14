@@ -40,11 +40,11 @@ class SignUpActivity : AppCompatActivity() {
         Firebase.auth.signInWithEmailAndPassword(userEmail, password)
             .addOnCompleteListener(this) {
                 if (it.isSuccessful) {
-                    Toast.makeText(this, "회원가입에 성공했습니다. 로그인해주세요", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(this, "회원가입에 성공했습니다.", Toast.LENGTH_SHORT).show()
 
-                    Firebase.auth.signOut()
+                    //Firebase.auth.signOut()
                     startActivity(
-                        Intent(this, LoginActivity::class.java))
+                        Intent(this, MainActivity::class.java))
                     finish()
                 } else {
                     Log.w("LoginActivity", "signInWithEmail", it.exception)

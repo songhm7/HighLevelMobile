@@ -22,7 +22,7 @@ class WriteActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_write)
-
+        supportActionBar?.title = Firebase.auth.currentUser?.email ?: "No User"
         val userEmail = Firebase.auth.currentUser?.email.toString()
 
         //글을 수정하는 경우
@@ -51,19 +51,21 @@ class WriteActivity : AppCompatActivity() {
             finish()
         }
         findViewById<Button>(R.id.post).setOnClickListener {
-            try {
-                val title = findViewById<EditText>(R.id.titleOfPost).text.toString()
-                val pricestr = findViewById<EditText>(R.id.priceOfPost).text.toString()
+            val title = findViewById<EditText>(R.id.titleOfPost).text.toString()
+            val pricestr = findViewById<EditText>(R.id.priceOfPost).text.toString()
+            val body = findViewById<EditText>(R.id.bodyOfPost).text.toString()
+            val onSale = findViewById<CheckBox>(R.id.ifOnSale).isChecked
+            if(!title.equals("") && !pricestr.equals("") && !body.equals("")) {
                 val priceint: Int = pricestr.toInt()
-                val body = findViewById<EditText>(R.id.bodyOfPost).text.toString()
-                val onSale = findViewById<CheckBox>(R.id.ifOnSale).isChecked
                 post(userEmail, userName, title, priceint, body, onSale, isModify)
                 Toast.makeText(this, "게시완료.", Toast.LENGTH_SHORT).show()
                 startActivity(Intent(this, MainActivity::class.java))
                 finish()
-            } catch(e : NumberFormatException){
-                Toast.makeText(this, "가격을 설정해주세요.", Toast.LENGTH_SHORT).show()
             }
+            else{
+                Toast.makeText(this, "제목과 본문, 가격을 모두 입력해주세요.", Toast.LENGTH_SHORT).show()
+            }
+
         }
 
         
