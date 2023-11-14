@@ -4,6 +4,8 @@ import android.content.Intent
 import android.graphics.BitmapFactory
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.Menu
+import android.view.MenuItem
 import android.widget.Button
 import android.widget.CheckBox
 import android.widget.EditText
@@ -26,6 +28,27 @@ import com.google.firebase.storage.ktx.storage
 class MainActivity : AppCompatActivity() {
     private val viewModel by viewModels<MyViewModel>()
 
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        menuInflater.inflate(R.menu.menu_main, menu)
+        return true
+    }
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        return when (item.itemId) {
+            R.id.menu_sign_out -> {
+                // 로그아웃 로직
+                Firebase.auth.signOut()
+                startActivity(Intent(this, LoginActivity::class.java))
+                finish()
+                true
+            }
+            R.id.menu_write_new_post -> {
+                startActivity(Intent(this, WriteActivity::class.java))
+                finish()
+                true
+            }
+            else -> super.onOptionsItemSelected(item)
+        }
+    }
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -34,17 +57,7 @@ class MainActivity : AppCompatActivity() {
             startActivity(Intent(this, LoginActivity::class.java))
             finish()
         }
-
-        findViewById<TextView>(R.id.textUID).text = Firebase.auth.currentUser?.email ?: "No User" //현재유저id표시
-        findViewById<Button>(R.id.button_signout).setOnClickListener {//로그아웃버튼
-            Firebase.auth.signOut()
-            startActivity(Intent(this, LoginActivity::class.java))
-            finish()
-        }
-        findViewById<Button>(R.id.buttonWriteSell).setOnClickListener {
-            startActivity(Intent(this, WriteActivity::class.java))
-            finish()
-        }
+        supportActionBar?.title = Firebase.auth.currentUser?.email ?: "No User"
 
 
         //판매글 목록

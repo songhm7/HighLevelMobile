@@ -1,0 +1,8 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+<item
+    android:id="@+id/menu_sign_out"
+    android:title="로그아웃"/>
+<item
+    android:id="@+id/menu_write_new_post"
+    android:title="판매글 작성"/>
+</menu>

@@ -6,93 +6,46 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
-    <TextView
-        android:id="@+id/textUID"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:text="Hello World!"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView4" />
-
-    <TextView
-        android:id="@+id/textView4"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:text="현재 유저의 이메일:"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerView"
         android:layout_width="match_parent"
-        android:layout_height="575dp"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_height="wrap_content"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/button_signout"
-        app:layout_constraintVertical_bias="0.0" />
-
-    <Button
-        android:id="@+id/buttonWriteSell"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="47dp"
-        android:layout_marginTop="120dp"
-        android:layout_marginEnd="47dp"
-        android:text="판매글 추가"
-        app:layout_constraintBottom_toTopOf="@+id/recyclerView"
-        app:layout_constraintEnd_toStartOf="@+id/button_filter"
-        app:layout_constraintHorizontal_bias="0.8"
-        app:layout_constraintStart_toEndOf="@+id/button_signout"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <Button
-        android:id="@+id/button_signout"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="64dp"
-        android:text="sign_out"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textUID" />
+        app:layout_constraintTop_toBottomOf="@+id/button_filter" />
 
     <Button
         android:id="@+id/button_filter"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="120dp"
-        android:text="필터 적용"
-        app:layout_constraintBottom_toTopOf="@+id/recyclerView"
+        android:text="검색"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/query_min" />
 
     <EditText
         android:id="@+id/query_id"
         android:layout_width="80dp"
         android:layout_height="39dp"
+        android:layout_marginStart="8dp"
         android:ems="10"
         android:hint="판매자명"
         android:inputType="text"
         android:textSize="16dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintBottom_toTopOf="@+id/recyclerView"
+        app:layout_constraintStart_toEndOf="@+id/IDtxt" />
 
     <EditText
         android:id="@+id/query_title"
         android:layout_width="178dp"
         android:layout_height="39dp"
+        android:layout_marginTop="40dp"
         android:ems="10"
         android:hint="제목"
         android:inputType="text"
         android:textSize="16dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/query_id" />
+        app:layout_constraintStart_toEndOf="@+id/titletxt"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
         android:id="@+id/query_max"
@@ -102,19 +55,18 @@
         android:hint="최대"
         android:inputType="number"
         android:textSize="16dp"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/between"
         app:layout_constraintTop_toBottomOf="@+id/query_title" />
 
     <EditText
         android:id="@+id/query_min"
         android:layout_width="75dp"
         android:layout_height="39dp"
-        android:layout_marginEnd="16dp"
         android:ems="10"
         android:hint="최소"
         android:inputType="number"
         android:textSize="16dp"
-        app:layout_constraintEnd_toEndOf="@+id/between"
+        app:layout_constraintStart_toEndOf="@+id/pricetxt"
         app:layout_constraintTop_toBottomOf="@+id/query_title" />
 
     <TextView
@@ -122,49 +74,44 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
-        android:layout_marginEnd="7dp"
         android:text="~"
-        app:layout_constraintEnd_toStartOf="@+id/query_max"
+        app:layout_constraintStart_toEndOf="@+id/query_min"
         app:layout_constraintTop_toBottomOf="@+id/query_title" />
 
     <TextView
         android:id="@+id/pricetxt"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="4dp"
+        android:layout_marginTop="15dp"
         android:text="가격 : "
-        app:layout_constraintEnd_toStartOf="@+id/query_min"
-        app:layout_constraintTop_toBottomOf="@+id/query_title" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/titletxt" />
 
     <TextView
         android:id="@+id/titletxt"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="48dp"
-        android:layout_marginEnd="4dp"
+        android:layout_marginTop="12dp"
         android:text="제목 : "
-        app:layout_constraintEnd_toStartOf="@+id/query_title"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/onSaleCheck" />
 
     <TextView
         android:id="@+id/IDtxt"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="4dp"
+        android:layout_marginTop="29dp"
         android:text="판매자 : "
-        app:layout_constraintEnd_toStartOf="@+id/query_id"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/pricetxt" />
 
     <CheckBox
         android:id="@+id/onSaleCheck"
         android:layout_width="81dp"
         android:layout_height="36dp"
-        android:layout_marginEnd="4dp"
         android:text="판매여부"
         android:textSize="13dp"
-        app:layout_constraintEnd_toStartOf="@+id/IDtxt"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
 
