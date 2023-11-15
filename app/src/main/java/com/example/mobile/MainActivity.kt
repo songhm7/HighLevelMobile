@@ -52,7 +52,8 @@ class MainActivity : AppCompatActivity() {
                 true
             }
             R.id.menu_view_message -> {
-                Toast.makeText(this, "받은 메시지 목록 기능 구현 예정", Toast.LENGTH_SHORT).show()
+                startActivity(Intent(this, ViewMsgActivity::class.java))
+                finish()
                 true
             }
             else -> super.onOptionsItemSelected(item)
