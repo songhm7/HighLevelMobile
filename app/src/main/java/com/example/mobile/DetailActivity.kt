@@ -63,7 +63,9 @@ class DetailActivity : AppCompatActivity() {
             finish()
         }
         msgButton.setOnClickListener{
-            Toast.makeText(this, "판매자에게 메시지 기능 구현 예정", Toast.LENGTH_SHORT).show()
+            val intent = Intent(this, SendMsgActivity::class.java)
+            intent.putExtra("SELLER_EMAIL", sellerEmail) // Intent에 판매자 이메일 추가
+            startActivity(intent)
         }
     }
 

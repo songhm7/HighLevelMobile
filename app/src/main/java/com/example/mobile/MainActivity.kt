@@ -48,7 +48,8 @@ class MainActivity : AppCompatActivity() {
                 true
             }
             R.id.menu_write_message -> {
-                Toast.makeText(this, "메시지 보내기 기능 구현 예정", Toast.LENGTH_SHORT).show()
+                startActivity(Intent(this, SendMsgActivity::class.java))
+                finish()
                 true
             }
             R.id.menu_view_message -> {
