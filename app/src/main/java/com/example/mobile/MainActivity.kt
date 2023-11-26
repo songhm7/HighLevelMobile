@@ -6,11 +6,14 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
+import android.widget.AdapterView
+import android.widget.ArrayAdapter
 import android.widget.Button
 import android.widget.CheckBox
 import android.widget.EditText
 import android.widget.ImageView
 import android.widget.LinearLayout
+import android.widget.Spinner
 import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.viewModels
@@ -70,7 +73,6 @@ class MainActivity : AppCompatActivity() {
         }
         supportActionBar?.title = Firebase.auth.currentUser?.email ?: "No User"
 
-
         //판매글 목록
         val adapter = CustomAdapter(viewModel)
         val recyclerView = findViewById<RecyclerView>(R.id.recyclerView)
@@ -111,6 +113,7 @@ class MainActivity : AppCompatActivity() {
 
             val onSaleCheck = findViewById<CheckBox>(R.id.onSaleCheck)
             val query_id = findViewById<EditText>(R.id.query_id)
+            val query_mail = findViewById<EditText>(R.id.query_mail)
             val query_title = findViewById<EditText>(R.id.query_title)
             val query_max = findViewById<EditText>(R.id.query_max)
             val query_min = findViewById<EditText>(R.id.query_min)
@@ -149,6 +152,10 @@ class MainActivity : AppCompatActivity() {
                 if (!query_min.getText().toString().isEmpty()){
                     val minPrice = Integer.parseInt(query_min.getText().toString())
                     items = ArrayList(items.filter { it.price >= minPrice })
+                }
+                if (!query_mail.getText().toString().isEmpty()){
+                    val email = query_mail.getText().toString()
+                    items = ArrayList(items.filter { it.selleremail.contains(email) })
                 }
 
                 for (item in items){
