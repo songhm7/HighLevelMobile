@@ -16,9 +16,12 @@ class LoginActivity : AppCompatActivity() {
         setContentView(R.layout.activity_login)
 
         findViewById<Button>(R.id.login)?.setOnClickListener { //로그인 버튼 클릭 리스너
-            val userEmail = findViewById<EditText>(R.id.email)?.text.toString()
-            val password = findViewById<EditText>(R.id.password)?.text.toString()
-            doLogin(userEmail, password)
+            val userEmail = findViewById<EditText>(R.id.email).text?.toString()
+            val password = findViewById<EditText>(R.id.password).text?.toString()
+            if(!userEmail.isNullOrBlank() && !password.isNullOrBlank())
+                doLogin(userEmail, password)
+            else
+                Toast.makeText(this, "이메일과 비밀번호를 입력해주세요", Toast.LENGTH_SHORT).show()
         }
         findViewById<Button>(R.id.sing_up)?.setOnClickListener { //회원가입 액티비티로 이동
             startActivity(

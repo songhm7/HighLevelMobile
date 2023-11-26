@@ -46,7 +46,7 @@ class CustomAdapter(private val viewModel: MyViewModel) :
             var priceOfobj = view.findViewById<TextView>(R.id.price)
             with (viewModel.items[pos]) {
                 sell.text = " " + title
-                name.text = " 판매자 : "+ sellername
+                name.text = " 판매자 : "+ sellername + " | " + selleremail
                 if(onSale){
                     view.setBackgroundColor(Color.parseColor("#87CEEB"))
                     priceOfobj.text = " 가격 : "+ price + " | (판매중)"
