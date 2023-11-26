@@ -46,11 +46,12 @@ class WriteActivity : AppCompatActivity() {
             }
         }
 
-        findViewById<Button>(R.id.back).setOnClickListener {
+        findViewById<Button>(R.id.back).setOnClickListener { //뒤로가기 버튼
             startActivity(Intent(this, MainActivity::class.java))
             finish()
         }
-        findViewById<Button>(R.id.post).setOnClickListener {
+
+        findViewById<Button>(R.id.post).setOnClickListener { //게시하기 버튼
             val title = findViewById<EditText>(R.id.titleOfPost).text.toString()
             val pricestr = findViewById<EditText>(R.id.priceOfPost).text.toString()
             val body = findViewById<EditText>(R.id.bodyOfPost).text.toString()

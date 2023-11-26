@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
+import android.view.View
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.Button
@@ -31,6 +32,7 @@ import com.google.firebase.storage.ktx.storage
 
 class MainActivity : AppCompatActivity() {
     private val viewModel by viewModels<MyViewModel>()
+    private var spinnerSelect = 1 // Spinner 선택을 추적하는 변수
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         menuInflater.inflate(R.menu.menu_main, menu)
@@ -106,12 +108,35 @@ class MainActivity : AppCompatActivity() {
             }
         }
 
+        //판매여부 필터링에 사용할 스피너(콤보박스)
+        val spinnerSaleStatus = findViewById<Spinner>(R.id.onSaleCheck)
+        ArrayAdapter.createFromResource(
+            this,
+            R.array.sale_status_options,
+            android.R.layout.simple_spinner_item
+        ).also { adapter ->
+            adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+            spinnerSaleStatus.adapter = adapter
+        }
+        spinnerSaleStatus.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+            override fun onItemSelected(parent: AdapterView<*>, view: View, position: Int, id: Long) {
+                when (parent.getItemAtPosition(position).toString()) {
+                    "전체" -> { spinnerSelect = 1 }
+                    "판매중" -> { spinnerSelect = 2 }
+                    "판매종료" -> { spinnerSelect = 3 }
+                }
+            }
+            override fun onNothingSelected(parent: AdapterView<*>) {
+                //spinnerSelect = 1
+            }
+        }
+        spinnerSaleStatus.setSelection(0) // 스피너 기본값으로 인덱스 0으로 설정
+
         //필터 적용
         findViewById<Button>(R.id.button_filter).setOnClickListener {
             //일단 현재 리스트를 전부 지운 뒤
             viewModel.deleteall()
 
-            val onSaleCheck = findViewById<CheckBox>(R.id.onSaleCheck)
             val query_id = findViewById<EditText>(R.id.query_id)
             val query_mail = findViewById<EditText>(R.id.query_mail)
             val query_title = findViewById<EditText>(R.id.query_title)
@@ -119,7 +144,11 @@ class MainActivity : AppCompatActivity() {
             val query_min = findViewById<EditText>(R.id.query_min)
 
             //필터 적용
-            var query_result = itemsCollectionRef.whereEqualTo("onSale",onSaleCheck.isChecked)
+            val query_result = when (spinnerSelect) {
+                2 -> itemsCollectionRef.whereEqualTo("onSale", true)
+                3 -> itemsCollectionRef.whereEqualTo("onSale", false)
+                else -> itemsCollectionRef
+            }
             query_result.get().addOnSuccessListener { documents ->
                 var items = ArrayList<Item>()
                 for(document in documents){

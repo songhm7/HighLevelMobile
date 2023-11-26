@@ -127,11 +127,10 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/pricetxt" />
 
-    <CheckBox
+    <Spinner
         android:id="@+id/onSaleCheck"
-        android:layout_width="81dp"
+        android:layout_width="150dp"
         android:layout_height="36dp"
-        android:text="판매여부"
         android:textSize="13dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
