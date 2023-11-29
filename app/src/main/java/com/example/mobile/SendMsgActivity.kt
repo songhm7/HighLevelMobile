@@ -55,6 +55,8 @@ class SendMsgActivity : AppCompatActivity() {
             .add(messageData)
             .addOnSuccessListener {
                 Toast.makeText(this, "메시지 전송 성공", Toast.LENGTH_SHORT).show()
+                startActivity(Intent(this, MainActivity::class.java))
+                finish()
             }
             .addOnFailureListener {
                 Toast.makeText(this, "메시지 전송 실패", Toast.LENGTH_SHORT).show()
