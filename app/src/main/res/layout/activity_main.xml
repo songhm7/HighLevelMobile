@@ -41,7 +41,7 @@
         android:id="@+id/button_filter"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="검색"
+        android:text="적용"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/query_min" />
 
@@ -71,8 +71,9 @@
 
     <EditText
         android:id="@+id/query_max"
-        android:layout_width="80dp"
+        android:layout_width="100dp"
         android:layout_height="39dp"
+        android:layout_marginStart="5dp"
         android:ems="10"
         android:hint="최대"
         android:inputType="number"
@@ -82,7 +83,7 @@
 
     <EditText
         android:id="@+id/query_min"
-        android:layout_width="75dp"
+        android:layout_width="100dp"
         android:layout_height="39dp"
         android:ems="10"
         android:hint="최소"
@@ -95,7 +96,8 @@
         android:id="@+id/between"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
+        android:layout_marginStart="5dp"
+        android:layout_marginTop="4dp"
         android:text="~"
         app:layout_constraintStart_toEndOf="@+id/query_min"
         app:layout_constraintTop_toBottomOf="@+id/query_title" />

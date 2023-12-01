@@ -18,6 +18,7 @@
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:text="제목"
+            android:textSize="15dp"
             android:textAlignment="center"
             android:id="@+id/titleOfShow"/>
         <Button

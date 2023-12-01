@@ -39,7 +39,7 @@ class DetailActivity : AppCompatActivity() {
                     onSale = document.getBoolean("onSale") ?: false
 
                     titleOfShow.text = title
-                    titleOfShow.setTextSize(30f)
+                    //titleOfShow.setTextSize(30f)
                     val isOnSale = findViewById<TextView>(R.id.isOnSale)
                     if(onSale) {
                         isOnSale.text = "판매중"
